@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lab 04 - Login Form</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-container" aria-labelledby="loginTitle">
+      <h1 id="loginTitle">Đăng nhập</h1>
+
+      <form id="loginForm" novalidate aria-describedby="formDesc">
+        <p id="formDesc" class="sr-only">Form đăng nhập gồm Username, Password, Remember me và các nút Login/Cancel.</p>
+
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          placeholder="Nhập username"
+          required
+          minlength="3"
+          maxlength="30"
+        />
+
+        <label for="password">Password</label>
+        <div class="password-row">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Nhập mật khẩu"
+            required
+            minlength="6"
+          />
+          <button type="button" id="togglePassword" class="icon-btn" aria-label="Hiện/Ẩn mật khẩu">👁️</button>
+        </div>
+
+        <div class="row remember-row">
+          <input id="remember" type="checkbox" />
+          <label for="remember">Remember me</label>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" id="loginBtn" class="btn primary">Login</button>
+          <button type="button" id="cancelBtn" class="btn danger">Cancel</button>
+        </div>
+
+        <p id="errorMsg" class="error" role="alert" aria-live="polite"></p>
+        <p id="successMsg" class="success" aria-live="polite"></p>
+      </form>
+
+      <footer class="help">
+        <small>Gợi ý: username >= 3 ký tự, password >= 6 ký tự. Đưa source lên GitHub và bật GitHub Pages để demo.</small>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
