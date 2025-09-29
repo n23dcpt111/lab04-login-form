@@ -83,24 +83,50 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.removeItem('lab04_rememberedUsername');
     }
 
-    // Simulate login request
-    loginBtn.disabled = true;
-    loginBtn.textContent = 'Đang đăng nhập...';
+    // // Simulate login request
+    // loginBtn.disabled = true;
+    // loginBtn.textContent = 'Đang đăng nhập...';
 
-    // Fake server delay
-    setTimeout(() => {
-      // Example: reject a specific user to show error
-      if (username.toLowerCase() === 'blocked') {
-        loginBtn.disabled = false;
-        loginBtn.textContent = 'Login';
-        showError('Tài khoản bị khóa. Liên hệ admin.');
+    // Submit handler (simulate server)
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorMsg.textContent = '';
+      successMsg.textContent = '';
+
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value;
+
+      const err = validate(username, password);
+      if (err) {
+        showError(err);
         return;
       }
 
-      loginBtn.textContent = 'Login';
-      showSuccess('Đăng nhập thành công! (demo)');
-      // Normally redirect: window.location.href = '/dashboard.html';
-    }, 900);
+      // Save remember preference
+      if (rememberCheckbox.checked) {
+        localStorage.setItem('lab04_rememberedUsername', username);
+      } else {
+        localStorage.removeItem('lab04_rememberedUsername');
+      }
+
+      // Giả lập kiểm tra login
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Đang đăng nhập...';
+
+      setTimeout(() => {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Login';
+
+        if (username === 'admin' && password === 'admin123456') {
+          showSuccess('Đăng nhập thành công!');
+          // Ví dụ: chuyển hướng sang dashboard.html
+          // window.location.href = 'dashboard.html';
+        } else {
+          showError('Sai username hoặc password!');
+        }
+      }, 800);
+    });
+
   });
 
   // Cancel button: reset form
